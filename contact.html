@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — Steve Clément</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --border: rgba(255,255,255,0.08);
+      --accent: #c9a96e;
+      --accent2: #e8d5b0;
+      --text: #e8e0d4;
+      --muted: rgba(232,224,212,0.45);
+      --ff-serif: 'Cormorant Garamond', Georgia, serif;
+      --ff-mono: 'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--ff-serif);
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    .cursor { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+    .cursor-ring { width: 36px; height: 36px; border: 1px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: all 0.18s ease; opacity: 0.5; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 2rem 4rem;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
+    }
+    .nav-logo { font-size: 1.1rem; font-weight: 400; letter-spacing: 0.15em; color: var(--accent2); text-decoration: none; font-family: var(--ff-mono); }
+    .nav-links { display: flex; gap: 3rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-family: var(--ff-mono); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; transition: color 0.3s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-links a.active { color: var(--accent); }
+    .nav-links a.active::after { transform: scaleX(1); }
+
+    /* MAIN LAYOUT */
+    .contact-layout {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* LEFT */
+    .contact-left {
+      padding: 12rem 4rem 4rem;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-left-bg {
+      position: absolute;
+      bottom: -4rem; left: -2rem;
+      font-size: 22rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.015);
+      font-style: italic;
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .contact-label {
+      font-family: var(--ff-mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .contact-title {
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.4s forwards;
+    }
+    .contact-title em { font-style: italic; color: var(--accent); }
+
+    .contact-intro {
+      font-family: var(--ff-mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.9;
+      max-width: 400px;
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.6s forwards;
+    }
+
+    /* CONTACT LINKS */
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.8s forwards;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.3s;
+      group: true;
+    }
+    .contact-method:first-child { border-top: 1px solid var(--border); }
+
+    .contact-method:hover { padding-left: 1rem; }
+
+    .method-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .method-type {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .method-value {
+      font-size: 1.1rem;
+      font-weight: 400;
+      transition: color 0.3s;
+    }
+    .contact-method:hover .method-value { color: var(--accent); }
+
+    .method-arrow {
+      color: var(--muted);
+      font-size: 1.2rem;
+      transition: all 0.3s;
+    }
+    .contact-method:hover .method-arrow { color: var(--accent); transform: translateX(8px); }
+
+    /* RIGHT - FORM */
+    .contact-right {
+      padding: 12rem 4rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-header {
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+
+    .form-label-top {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .form-title {
+      font-size: 2rem;
+      font-weight: 300;
+    }
+    .form-title em { font-style: italic; color: var(--accent); }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.5s forwards;
+    }
+
+    .form-group {
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.3s;
+    }
+    .form-group:first-of-type { border-top: 1px solid var(--border); }
+    .form-group:focus-within { border-color: var(--accent); }
+
+    .form-group label {
+      display: block;
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 1.2rem 0 0;
+      transition: color 0.3s;
+    }
+    .form-group:focus-within label { color: var(--accent); }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-family: var(--ff-serif);
+      font-size: 1.1rem;
+      font-weight: 300;
+      padding: 0.5rem 0 1.2rem;
+      resize: none;
+    }
+
+    .form-group textarea { min-height: 100px; }
+
+    .form-group select option { background: var(--surface); color: var(--text); }
+
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2.5rem;
+    }
+
+    .form-note {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .btn-primary {
+      display: inline-block; padding: 1rem 2.5rem; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; transition: all 0.3s ease; position: relative; overflow: hidden; background: none; cursor: none;
+    }
+    .btn-primary::before { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateY(100%); transition: transform 0.3s ease; z-index: 0; }
+    .btn-primary:hover { color: var(--bg); }
+    .btn-primary:hover::before { transform: translateY(0); }
+    .btn-primary span { position: relative; z-index: 1; }
+
+    /* SUCCESS */
+    .success-message {
+      display: none;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem;
+      border: 1px solid var(--accent);
+      margin-top: 1.5rem;
+    }
+    .success-message.show { display: flex; }
+    .success-icon { color: var(--accent); font-size: 1.2rem; }
+    .success-text { font-family: var(--ff-mono); font-size: 0.7rem; color: var(--text); letter-spacing: 0.1em; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; }
+    .footer-social { display: flex; gap: 2rem; }
+    .footer-social a { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--muted); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.3s; }
+    .footer-social a:hover { color: var(--accent); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.5rem 2rem; }
+      .contact-layout { grid-template-columns: 1fr; }
+      .contact-left { border-right: none; border-bottom: 1px solid var(--border); padding: 8rem 2rem 4rem; }
+      .contact-right { padding: 4rem 2rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">SC</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="expertise.html">Expertise</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="contact-layout">
+
+    <!-- LEFT -->
+    <div class="contact-left">
+      <span class="contact-left-bg">Social media.</span>
+
+      <p class="contact-label">Discutons ensemble</p>
+      <h1 class="contact-title">Prêt à<br>collaborer <em>?</em></h1>
+      <p class="contact-intro">
+        Que ce soit pour un nouveau projet, une opportunité professionnelle ou simplement pour échanger — je suis toujours ouvert à une bonne conversation.
+      </p>
+
+      <div class="contact-methods">
+        <a href="mailto:steveclement13@gmail.com" class="contact-method">
+          <div class="method-left">
+            <span class="method-type">Email</span>
+            <span class="method-value">steveclement13@gmail.com</span>
+          </div>
+          <span class="method-arrow">→</span>
+        </a>
+        <a href="https://linkedin.com/in/steve-clement" target="_blank" class="contact-method">
+          <div class="method-left">
+            <span class="method-type">LinkedIn</span>
+            <span class="method-value">linkedin.com/in/steve-clement</span>
+          </div>
+          <span class="method-arrow">→</span>
+        </a>
+        <a href="https://github.com/steveclement42" target="_blank" class="contact-method">
+          <div class="method-left">
+            <span class="method-type">GitHub</span>
+            <span class="method-value">github.com/steveclement42</span>
+          </div>
+          <span class="method-arrow">→</span>
+        </a>
+        <a href="CV_Steve_Clement.pdf" download class="contact-method">
+          <div class="method-left">
+            <span class="method-type">CV</span>
+            <span class="method-value">Télécharger mon CV</span>
+          </div>
+          <span class="method-arrow">↓</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p class="footer-copy">© 2026 Steve Clément. Tous droits réservés.</p>
+    <div class="footer-social">
+      <a href="https://linkedin.com/in/steve-clement">LinkedIn</a>
+      <a href="https://github.com/steveclement42">GitHub</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
+      setTimeout(() => { ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px'; }, 60);
+    });
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => { ring.style.width = '60px'; ring.style.height = '60px'; ring.style.opacity = '0.8'; });
+      el.addEventListener('mouseleave', () => { ring.style.width = '36px'; ring.style.height = '36px'; ring.style.opacity = '0.5'; });
+    });
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.innerHTML = '<span>Envoi en cours...</span>';
+      btn.disabled = true;
+      setTimeout(() => {
+        document.getElementById('successMsg').classList.add('show');
+        btn.innerHTML = '<span>Envoyé ✦</span>';
+        e.target.reset();
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
