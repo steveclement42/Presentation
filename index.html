@@ -610,7 +610,14 @@
     @media (max-width: 900px) {
       nav { padding: 1.5rem 2rem; }
       .hero { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
+      .hero-right { display: flex;
+                    padding: 2rem 2rem 4rem;
+                    justify-content: center;
+                  }
+      .hero-photo-wrap {
+                    width: 260px;
+                    height: 340px; 
+                  }
       .hero-left { padding: 7rem 2rem 4rem; }
       .stats-strip { grid-template-columns: repeat(2,1fr); padding: 2rem; }
       .section { padding: 5rem 2rem; }
