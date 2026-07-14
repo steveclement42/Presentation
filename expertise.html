@@ -50,6 +50,22 @@
     .nav-links a.active { color: var(--accent); }
     .nav-links a.active::after { transform: scaleX(1); }
 
+    /* LANG / PROFILE CONTROLS */
+    .nav-controls { display: flex; align-items: center; gap: 1rem; }
+    .profile-select {
+      background: var(--bg); color: var(--text); border: 1px solid var(--border);
+      padding: 0.5rem 0.9rem; font-family: var(--ff-mono); font-size: 0.65rem;
+      letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; outline: none;
+      transition: border-color 0.3s;
+    }
+    .profile-select:hover, .profile-select:focus { border-color: var(--accent); }
+    .lang-toggle {
+      background: none; color: var(--muted); border: 1px solid var(--border);
+      padding: 0.5rem 0.9rem; font-family: var(--ff-mono); font-size: 0.65rem;
+      letter-spacing: 0.15em; cursor: pointer; transition: all 0.3s;
+    }
+    .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
     /* PAGE HERO */
     .page-hero {
       padding: 14rem 4rem 6rem;
@@ -335,7 +351,8 @@
     ::-webkit-scrollbar-thumb { background: var(--accent); }
 
     @media (max-width: 900px) {
-      nav { padding: 1.5rem 2rem; }
+      nav { padding: 1.5rem 2rem; flex-wrap: wrap; gap: 1rem; }
+      .nav-links { gap: 1.5rem; }
       .page-hero { padding: 10rem 2rem 4rem; }
       .section { padding: 4rem 2rem; }
       .skills-categories, .formation-grid { grid-template-columns: 1fr; }
@@ -346,7 +363,7 @@
     }
   </style>
 </head>
-<body>
+<body data-page="expertise">
 
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
@@ -354,16 +371,20 @@
   <nav>
     <a href="index.html" class="nav-logo">SC</a>
     <ul class="nav-links">
-      <li><a href="index.html">Accueil</a></li>
-      <li><a href="expertise.html" class="active">Expertise</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="index.html" id="nav-home">Accueil</a></li>
+      <li><a href="expertise.html" class="active" id="nav-expertise">Expertise</a></li>
+      <li><a href="contact.html" id="nav-contact">Contact</a></li>
     </ul>
+    <div class="nav-controls">
+      <select id="profileSelect" class="profile-select" aria-label="Profil / Profile"></select>
+      <button id="langToggle" class="lang-toggle" type="button">EN</button>
+    </div>
   </nav>
 
   <!-- PAGE HERO -->
   <div class="page-hero">
-    <p class="page-hero-label">Mon savoir-faire</p>
-    <h1 class="page-hero-title">Mon<br><em>Expertise</em></h1>
+    <p class="page-hero-label" id="pageHeroLabel">Mon savoir-faire</p>
+    <h1 class="page-hero-title" id="pageHeroTitle">Mon<br><em>Expertise</em></h1>
     <span class="page-hero-bg">EXP.</span>
   </div>
 
@@ -371,29 +392,29 @@
   <section class="section">
     <div class="section-header reveal">
       <span class="section-number">01</span>
-      <h2 class="section-title">Compétences <em>techniques</em> / Soft <em>Skills</em></h2>
+      <h2 class="section-title" id="s1Title">Compétences <em>techniques</em> / Soft <em>Skills</em></h2>
       <div class="section-line"></div>
     </div>
 
     <div class="skills-categories">
       <!-- Langages de programmation -->
       <div class="skill-category reveal">
-        <p class="category-title">Langages de programmation</p>
+        <p class="category-title" id="catLangages">Langages de programmation</p>
         <ul class="skill-list">
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">Python</span><span class="skill-level">Intermédiaire</span></div>
+            <div class="skill-header"><span class="skill-name-text">Python</span><span class="skill-level lvl-inter">Intermédiaire</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:65%"></div></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">C</span><span class="skill-level">Avancé</span></div>
+            <div class="skill-header"><span class="skill-name-text">C</span><span class="skill-level lvl-avance">Avancé</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:80%"></div></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">JS</span><span class="skill-level">Intermédiaire</span></div>
+            <div class="skill-header"><span class="skill-name-text">JS</span><span class="skill-level lvl-inter">Intermédiaire</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:65%"></div></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">C#</span><span class="skill-level">Avancé</span></div>
+            <div class="skill-header"><span class="skill-name-text">C#</span><span class="skill-level lvl-avance">Avancé</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:85%"></div></div>
           </li>
         </ul>
@@ -401,22 +422,22 @@
 
       <!-- Outils et Réseaux -->
       <div class="skill-category reveal">
-        <p class="category-title">Outils et Réseaux</p>
+        <p class="category-title" id="catOutils">Outils et Réseaux</p>
         <ul class="skill-list">
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">Purple Knight</span><span class="skill-level">Débutant</span></div>
+            <div class="skill-header"><span class="skill-name-text">Purple Knight</span><span class="skill-level lvl-debutant">Débutant</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:30%"></div></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">Wireshark</span><span class="skill-level">Intermédiaire</span></div>
+            <div class="skill-header"><span class="skill-name-text">Wireshark</span><span class="skill-level lvl-inter">Intermédiaire</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:60%"></div></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">LAN/MAN/WAN</span><span class="skill-level">Intermédiaire</span></div>
+            <div class="skill-header"><span class="skill-name-text">LAN/MAN/WAN</span><span class="skill-level lvl-inter">Intermédiaire</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:65%"></div></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">TCP/IP</span><span class="skill-level">Intermédiaire</span></div>
+            <div class="skill-header"><span class="skill-name-text">TCP/IP</span><span class="skill-level lvl-inter">Intermédiaire</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:65%"></div></div>
           </li>
         </ul>
@@ -424,18 +445,18 @@
 
       <!-- Technologies -->
       <div class="skill-category reveal">
-        <p class="category-title">Technologies</p>
+        <p class="category-title" id="catTechnologies">Technologies</p>
         <ul class="skill-list">
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">Blockchain</span><span class="skill-level">Notion</span></div>
+            <div class="skill-header"><span class="skill-name-text">Blockchain</span><span class="skill-level lvl-notion">Notion</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:40%"></div></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">4G/5G</span><span class="skill-level">Avancé</span></div>
+            <div class="skill-header"><span class="skill-name-text">4G/5G</span><span class="skill-level lvl-avance">Avancé</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:70%"></div></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">Notion de Cybersécurité</span><span class="skill-level">Intermédiaire</span></div>
+            <div class="skill-header"><span class="skill-name-text">Notion de Cybersécurité</span><span class="skill-level lvl-inter">Intermédiaire</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:60%"></div></div>
           </li>
         </ul>
@@ -443,51 +464,51 @@
 
       <!-- Autres -->
       <div class="skill-category reveal">
-        <p class="category-title">Autres</p>
+        <p class="category-title" id="catAutres">Autres</p>
         <ul class="skill-list">
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">Git / GitHub</span><span class="skill-level">Avancé</span></div>
+            <div class="skill-header"><span class="skill-name-text">Git / GitHub</span><span class="skill-level lvl-avance">Avancé</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:80%"></div></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">Linux / Terminal</span><span class="skill-level">Intermédiaire</span></div>
+            <div class="skill-header"><span class="skill-name-text">Linux / Terminal</span><span class="skill-level lvl-inter">Intermédiaire</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:65%"></div></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">Suite adobe</span><span class="skill-level">Avancé</span></div>
+            <div class="skill-header"><span class="skill-name-text">Suite adobe</span><span class="skill-level lvl-avance">Avancé</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:85%"></div></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">PowerBI</span><span class="skill-level">Débutant</span></div>
+            <div class="skill-header"><span class="skill-name-text">PowerBI</span><span class="skill-level lvl-debutant">Débutant</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:35%"></div></div>
           </li>
         </ul>
       </div>
       <!-- Soft skills -->
       <div class="skill-category reveal">
-        <p class="category-title">Soft Skills</p>
+        <p class="category-title" id="catSoft">Soft Skills</p>
         <ul class="skill-list">
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">Travail en équipe</span><span class="skill-level">Avancé</span></div>
+            <div class="skill-header"><span class="skill-name-text">Travail en équipe</span><span class="skill-level lvl-avance">Avancé</span></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">Adaptatif</span><span class="skill-level">Intermédiaire</span></div>
+            <div class="skill-header"><span class="skill-name-text">Adaptatif</span><span class="skill-level lvl-inter">Intermédiaire</span></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">Créatif</span><span class="skill-level">Avancé</span></div>
+            <div class="skill-header"><span class="skill-name-text">Créatif</span><span class="skill-level lvl-avance">Avancé</span></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">Gestion du temps</span><span class="skill-level">Avancé</span></div>
+            <div class="skill-header"><span class="skill-name-text">Gestion du temps</span><span class="skill-level lvl-avance">Avancé</span></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">Résolution de problème</span><span class="skill-level">Intermédiaire</span></div>
+            <div class="skill-header"><span class="skill-name-text">Résolution de problème</span><span class="skill-level lvl-inter">Intermédiaire</span></div>
           </li>
           <li class="skill-item">
-            <div class="skill-header"><span class="skill-name-text">Vision d’ensemble</span><span class="skill-level">Intermédiaire</span></div>
+            <div class="skill-header"><span class="skill-name-text">Vision d’ensemble</span><span class="skill-level lvl-inter">Intermédiaire</span></div>
           </li>
         </ul>
       </div>
-      
+
     </div>
   </section>
 
@@ -495,30 +516,30 @@
   <section class="section" style="padding-top:0">
     <div class="section-header reveal">
       <span class="section-number">02</span>
-      <h2 class="section-title"><em>Expérience</em> professionnelle</h2>
+      <h2 class="section-title" id="s2Title"><em>Expérience</em> professionnelle</h2>
       <div class="section-line"></div>
     </div>
 
     <div class="timeline">
       <div class="timeline-item reveal">
-        <div class="timeline-date"> FEVRIER 2025 - AOUT 2025 <br>(6 MOIS)</div>
+        <div class="timeline-date" id="tl0-date"> FEVRIER 2025 - AOUT 2025 <br>(6 MOIS)</div>
         <div class="timeline-connector"></div>
         <div class="timeline-content">
-          <h3 class="timeline-role">STAGE FIN D’ÉTUDE GOUVERNANCE DE LA DONNÉE</h3>
-          <p class="timeline-company">CIRCET FRANCE - SOLLIES-PONT</p>
-          <p class="timeline-desc">Élaboration de fiche réflexe, mise en place de dash Board
-            PowerBI, élaboration de politique de cyber sécurité via Netskope. J'ai du prendre connaissance du workflow existant et 
+          <h3 class="timeline-role" id="tl0-role">STAGE FIN D’ÉTUDE GOUVERNANCE DE LA DONNÉE</h3>
+          <p class="timeline-company" id="tl0-company">CIRCET FRANCE - SOLLIES-PONT</p>
+          <p class="timeline-desc" id="tl0-desc">Élaboration de fiche réflexe, mise en place de dash Board
+            PowerBI, élaboration de politique de cyber sécurité via Netskope. J'ai du prendre connaissance du workflow existant et
             rassembler les données nécessaires afin d'établir des visuels pour faire la connexion entre les équipes technique et commerciales</p>
         </div>
       </div>
 
       <div class="timeline-item reveal">
-        <div class="timeline-date"> MARS 2023 - FÉVRIER 2024 <br>(1 AN)</div>
+        <div class="timeline-date" id="tl1-date"> MARS 2023 - FÉVRIER 2024 <br>(1 AN)</div>
         <div class="timeline-connector"></div>
         <div class="timeline-content">
-          <h3 class="timeline-role">STAGIAIRE DÉVELOPPEMENT GED</h3>
-          <p class="timeline-company">SETEC INTERNATIONAL - VITROLLES</p>
-          <p class="timeline-desc">Conception et développement d'une solution GED avec coffre-fort
+          <h3 class="timeline-role" id="tl1-role">STAGIAIRE DÉVELOPPEMENT GED</h3>
+          <p class="timeline-company" id="tl1-company">SETEC INTERNATIONAL - VITROLLES</p>
+          <p class="timeline-desc" id="tl1-desc">Conception et développement d'une solution GED avec coffre-fort
             sécurisé et processus de contrôle automatisé.
             <br>-Collaboration avec les équipes techniques et utilisateurs pour
             assurer une conformité aux normes de sécurité et aux attentes
@@ -532,30 +553,30 @@
   <section class="section" style="padding-top:0">
     <div class="section-header reveal">
       <span class="section-number">03</span>
-      <h2 class="section-title"><em>Formation</em></h2>
+      <h2 class="section-title" id="s3Title"><em>Formation</em></h2>
       <div class="section-line"></div>
     </div>
 
     <div class="formation-grid">
       <div class="formation-card reveal">
-        <p class="formation-year">2020 - 2025</p>
-        <h3 class="formation-title">INGÉNIEUR EN INFORMATIQUE</h3>
-        <p class="formation-school">EPITA - PARIS</p>
+        <p class="formation-year" id="f0-year">2020 - 2025</p>
+        <h3 class="formation-title" id="f0-title">INGÉNIEUR EN INFORMATIQUE</h3>
+        <p class="formation-school" id="f0-school">EPITA - PARIS</p>
       </div>
       <div class="formation-card reveal">
-        <p class="formation-year">2018 - 2020</p>
-        <h3 class="formation-title">CPGE TSI</h3>
-        <p class="formation-school">LYCÉE ROUVIÈRE, TOULON</p>
+        <p class="formation-year" id="f1-year">2018 - 2020</p>
+        <h3 class="formation-title" id="f1-title">CPGE TSI</h3>
+        <p class="formation-school" id="f1-school">LYCÉE ROUVIÈRE, TOULON</p>
       </div>
       <div class="formation-card reveal">
-        <p class="formation-year">Score 875</p>
-        <h3 class="formation-title">TOEIC</h3>
-        <p class="formation-school">875</p>
+        <p class="formation-year" id="f2-year">Score 875</p>
+        <h3 class="formation-title" id="f2-title">TOEIC</h3>
+        <p class="formation-school" id="f2-school">875</p>
       </div>
       <div class="formation-card reveal">
-        <p class="formation-year">2016</p>
-        <h3 class="formation-title">Un an aux USA</h3>
-        <p class="formation-school">Vécu et étudie près de San Diego dans une famille d'accueil</p>
+        <p class="formation-year" id="f3-year">2016</p>
+        <h3 class="formation-title" id="f3-title">Un an aux USA</h3>
+        <p class="formation-school" id="f3-school">Vécu et étudie près de San Diego dans une famille d'accueil</p>
       </div>
     </div>
   </section>
@@ -564,7 +585,7 @@
   <section class="section" style="padding-top:0">
     <div class="section-header reveal">
       <span class="section-number">04</span>
-      <h2 class="section-title">Outils & <em>Technologies</em></h2>
+      <h2 class="section-title" id="s4Title">Outils & <em>Technologies</em></h2>
       <div class="section-line"></div>
     </div>
 
@@ -581,13 +602,13 @@
   <!-- CV CTA -->
   <div class="section" style="padding-top:0;padding-bottom:0">
     <div class="cv-cta reveal">
-      <p class="cv-cta-text">Envie d'en savoir plus ?<br><em>Téléchargez mon CV.</em></p>
-      <a href="CV_Steve_Clement.pdf" class="btn-primary" download><span>Télécharger mon CV</span></a>
+      <p class="cv-cta-text" id="cvCtaText">Envie d'en savoir plus ?<br><em>Téléchargez mon CV.</em></p>
+      <a href="CV_Steve_Clement.pdf" id="cvCtaLink" class="btn-primary" download><span id="cvCtaBtn">Télécharger mon CV</span></a>
     </div>
   </div>
 
   <footer>
-    <p class="footer-copy">© 2026 Steve Clément. Tous droits réservés.</p>
+    <p class="footer-copy" id="footerCopy">© 2026 Steve Clément. Tous droits réservés.</p>
     <div class="footer-social">
       <a href="https://linkedin.com/in/steve-clement">LinkedIn</a>
       <a href="https://github.com/steveclement42">GitHub</a>
@@ -595,6 +616,8 @@
     </div>
   </footer>
 
+  <script src="content.js"></script>
+  <script src="site.js"></script>
   <script>
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
