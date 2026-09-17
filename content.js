@@ -38,15 +38,21 @@ const SITE_UI = {
       timeline: [
         {
           date: 'FÉVRIER 2025 - AOÛT 2025<br>(6 MOIS)',
-          role: 'STAGE FIN D’ÉTUDE GOUVERNANCE DE LA DONNÉE',
+          role: 'INGÉNIEUR EN GOUVERNANCE DE LA DONNÉE',
           company: 'CIRCET FRANCE - SOLLIÈS-PONT',
-          desc: 'Élaboration de fiche réflexe, mise en place de dashboards PowerBI, élaboration de politique de cyber sécurité via Netskope. J\'ai dû prendre connaissance du workflow existant et rassembler les données nécessaires afin d\'établir des visuels pour faire la connexion entre les équipes technique et commerciales.'
+          desc: 'Stage de fin d\'étude. Analyse et consolidation de données opérationnelles et cybersécurité.<br>-Définition et suivi d\'indicateurs de performance (KPI) pour les équipes opérationnelles.<br>-Conception de tableaux de bord Power BI destinés au pilotage de l\'activité.<br>-Production de reportings et visualisations facilitant la prise de décision.<br>-Analyse des tendances d\'incidents sur plusieurs années et identification des axes d\'amélioration.<br>-Participation à la mise en œuvre de plans d\'action liés à la gouvernance et à la maîtrise des risques.<br>-Collaboration avec des équipes multidisciplinaires et accompagnement des parties prenantes dans le suivi des objectifs.'
         },
         {
           date: 'MARS 2023 - FÉVRIER 2024<br>(1 AN)',
-          role: 'STAGIAIRE DÉVELOPPEMENT GED',
+          role: 'DÉVELOPPEUR GED',
           company: 'SETEC INTERNATIONAL - VITROLLES',
-          desc: 'Conception et développement d\'une solution GED avec coffre-fort sécurisé et processus de contrôle automatisé.<br>Collaboration avec les équipes techniques et utilisateurs pour assurer une conformité aux normes de sécurité et aux attentes clients. Établir un workflow pour les documents clients et hiérarchiser la vue selon les différents corps de métier.'
+          desc: 'Stage d\'un an. Participation à un projet de déploiement d\'une solution de gestion documentaire sécurisée.<br>-Coordination avec les équipes techniques et les utilisateurs finaux afin de recueillir les besoins et suivre l\'avancement des travaux.<br>-Planification et suivi des différentes étapes de personnalisation et de déploiement.<br>-Contribution à l\'amélioration continue des processus documentaires et des contrôles qualité.<br>-Gestion des priorités et respect des délais projet.'
+        },
+        {
+          date: 'AVRIL 2026 - Actuellement',
+          role: 'DÉVELOPPEUR DE SOLUTIONS AUTOMATISÉES ET IA',
+          company: 'ABCEXPERTS - BRAS',
+          desc: 'Conception d\'un système automatisé intelligent intégrant des modules d\'IA pour l\'optimisation des processus et le traitement de documents. Gestion, administration et maintenance technique du site internet.'
         }
       ],
       s3TitleEm: 'Formation',
@@ -57,6 +63,7 @@ const SITE_UI = {
         { year: '2016', title: 'Un an aux USA', school: 'Vécu et étudié près de San Diego dans une famille d\'accueil' }
       ],
       s4TitlePre: 'Outils & ', s4TitleEm: 'Technologies',
+      toolCve: 'Surveillance des CVE',
       cvCtaPre: 'Envie d\'en savoir plus ?', cvCtaEm: 'Téléchargez mon CV.',
       cvCtaBtn: 'Télécharger mon CV'
     },
@@ -106,15 +113,21 @@ const SITE_UI = {
       timeline: [
         {
           date: 'FEBRUARY 2025 - AUGUST 2025<br>(6 MONTHS)',
-          role: 'END-OF-STUDIES INTERNSHIP, DATA GOVERNANCE',
+          role: 'DATA GOVERNANCE ENGINEER',
           company: 'CIRCET FRANCE - SOLLIÈS-PONT',
-          desc: 'Built reflex/procedure sheets, set up Power BI dashboards, drafted a cybersecurity policy via Netskope. I had to learn the existing workflow and gather the necessary data to build visuals connecting technical and business teams.'
+          desc: 'End-of-studies internship. Analyzed and consolidated operational and cybersecurity data.<br>-Defined and tracked performance indicators (KPIs) for operational teams.<br>-Built Power BI dashboards for activity steering.<br>-Produced reports and visualizations to support decision-making.<br>-Analyzed multi-year incident trends and identified areas for improvement.<br>-Took part in rolling out action plans related to governance and risk management.<br>-Collaborated with multidisciplinary teams and supported stakeholders in tracking objectives.'
         },
         {
           date: 'MARCH 2023 - FEBRUARY 2024<br>(1 YEAR)',
-          role: 'DOCUMENT MANAGEMENT (GED) DEVELOPER INTERN',
+          role: 'DOCUMENT MANAGEMENT (GED) DEVELOPER',
           company: 'SETEC INTERNATIONAL - VITROLLES',
-          desc: 'Designed and developed a document management solution with a secure vault and automated control process.<br>Collaborated with technical teams and end users to ensure compliance with security standards and client expectations. Built a workflow for client documents and prioritized views by business area.'
+          desc: 'One-year internship. Took part in the rollout of a secure document management solution.<br>-Coordinated with technical teams and end users to gather requirements and track progress.<br>-Planned and monitored the various customization and deployment stages.<br>-Contributed to continuous improvement of document processes and quality controls.<br>-Managed priorities and met project deadlines.'
+        },
+        {
+          date: 'APRIL 2026 - Present',
+          role: 'AUTOMATED & AI SOLUTIONS DEVELOPER',
+          company: 'ABCEXPERTS - BRAS',
+          desc: 'Designing an intelligent automated system with AI modules for process optimization and document processing. Managing, administering and maintaining the company website.'
         }
       ],
       s3TitleEm: 'Education',
@@ -125,6 +138,7 @@ const SITE_UI = {
         { year: '2016', title: 'One year in the USA', school: 'Lived and studied near San Diego with a host family' }
       ],
       s4TitlePre: 'Tools & ', s4TitleEm: 'Technologies',
+      toolCve: 'CVE monitoring',
       cvCtaPre: 'Want to know more?', cvCtaEm: 'Download my CV.',
       cvCtaBtn: 'Download my CV'
     },

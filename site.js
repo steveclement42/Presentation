@@ -140,6 +140,7 @@
     });
 
     setHTML('s4Title', `${t.s4TitlePre}<em>${t.s4TitleEm}</em>`);
+    setText('toolCve', t.toolCve);
 
     setHTML('cvCtaText', `${t.cvCtaPre}<br><em>${t.cvCtaEm}</em>`);
     setText('cvCtaBtn', t.cvCtaBtn);
