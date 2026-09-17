@@ -140,7 +140,7 @@ const SITE_UI = {
 
 const SITE_PROFILES = {
   grc: {
-    cvFile: 'CV CLEMENT Steve GRC compressé.pdf',
+    cvFile: 'CV_Steve_Clement_GRC.pdf',
     fr: {
       roleLabel: 'Ingénieur GRC / Cyber Sécurité',
       heroSubtitle: 'Recherche un poste d’ingénieur en cyber sécurité orienté en GRC',
